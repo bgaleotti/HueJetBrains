@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.asarco.huejetbrains.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.asarco.huejetbrains.MyBundle
 
 class MyApplicationService {
 

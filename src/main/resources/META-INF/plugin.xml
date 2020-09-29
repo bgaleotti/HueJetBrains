@@ -1,19 +1,32 @@
 <idea-plugin>
     <id>com.github.asarco.huejetbrains</id>
     <name>Hueasarco</name>
-    <vendor>asarco</vendor>
+    <vendor email="sarcoale@gmail.com">Sarcobjects</vendor>
+    <description>bulb by Aiden Icons from the Noun Project</description>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
+
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.asarco.huejetbrains.services.MyApplicationService"/>
+        <applicationService serviceImplementation="com.github.asarco.huejetbrains.components.HuePersistentState"/>
+        <testStatusListener implementation="com.github.asarco.huejetbrains.listeners.TestResultListener"/>
+
         <projectService serviceImplementation="com.github.asarco.huejetbrains.services.MyProjectService"/>
+        <applicationConfigurable instance="com.github.asarco.huejetbrains.configurable.HuePersistenStateConfigurable"
+                                 id="asarco.hue" displayName="Hue" groupId="tools"/>
     </extensions>
+
 
     <applicationListeners>
         <listener class="com.github.asarco.huejetbrains.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action id="EnableHue" class="com.github.asarco.huejetbrains.actions.EnableHueAction" text="Enable Hue Lights" icon="/noun_bulb_1484510.png">
+            <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
+        </action>
+    </actions>
+
 </idea-plugin>

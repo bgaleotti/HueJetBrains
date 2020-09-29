@@ -38,9 +38,14 @@ version = pluginVersion
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url = uri("https://jitpack.io/")
+    }
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.13.1")
+    //implementation("io.github.zeroone3010:yetanotherhueapi:1.3.1")
+    implementation("com.github.inkapplications:shade:1.1.3")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -49,7 +54,7 @@ intellij {
     pluginName = pluginName_
     version = platformVersion
     type = platformType
-    downloadSources = platformDownloadSources.toBoolean()
+    downloadSources = true
     updateSinceUntilBuild = true
 
 //  Plugin Dependencies:

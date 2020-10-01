@@ -13,7 +13,7 @@ plugins {
     // gradle-changelog-plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
     id("org.jetbrains.changelog") version "0.5.0"
     // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
-    id("io.gitlab.arturbosch.detekt") version "1.13.1"
+    id("io.gitlab.arturbosch.detekt") version "1.14.0"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "9.4.0"
 }
@@ -43,8 +43,7 @@ repositories {
     }
 }
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.13.1")
-    //implementation("io.github.zeroone3010:yetanotherhueapi:1.3.1")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.0")
     implementation("com.github.inkapplications:shade:1.1.3")
 }
 
@@ -70,7 +69,7 @@ detekt {
     buildUponDefaultConfig = true
 
     reports {
-        html.enabled = false
+        html.enabled = true
         xml.enabled = false
         txt.enabled = false
     }

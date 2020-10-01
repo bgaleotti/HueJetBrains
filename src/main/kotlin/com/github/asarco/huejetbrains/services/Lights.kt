@@ -7,8 +7,5 @@ class Lights(val shade: Shade) {
         shade.lights.getLights().forEach { (id, light) ->
             println("Found light $id named ${light.name}")
         }
-
     }
-
-
 }

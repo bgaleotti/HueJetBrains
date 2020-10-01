@@ -4,7 +4,7 @@ import com.github.asarco.huejetbrains.components.HuePersistentState
 import inkapplications.shade.auth.TokenStorage
 import org.jetbrains.rpc.LOG
 
-class ConfigTokenStorage(private val state: HuePersistentState.HueState): TokenStorage {
+class ConfigTokenStorage(private val state: HuePersistentState.HueState) : TokenStorage {
 
     override suspend fun getToken(): String? {
         return state.hueToken

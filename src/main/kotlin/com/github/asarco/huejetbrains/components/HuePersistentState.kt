@@ -5,10 +5,9 @@ import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 
-
 @State(
-        name = "HueStateComponent",
-        storages = [Storage("hue-plugin.xml")]
+    name = "HueStateComponent",
+    storages = [Storage("hue-plugin.xml")]
 )
 
 open class HuePersistentState : PersistentStateComponent<HuePersistentState.HueState> {
@@ -31,6 +30,7 @@ open class HuePersistentState : PersistentStateComponent<HuePersistentState.HueS
     }
 
     class HueState {
+        var hueEnabled = true
         var hueIp = ""
         var hueToken = ""
         var hueLightId = ""

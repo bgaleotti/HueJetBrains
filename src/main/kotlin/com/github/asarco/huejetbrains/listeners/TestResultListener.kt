@@ -1,7 +1,7 @@
 package com.github.asarco.huejetbrains.listeners
 
 import com.github.ajalt.colormath.Ansi256
-import com.github.asarco.huejetbrains.ConfigTokenStorage
+import com.github.asarco.huejetbrains.*
 import com.github.asarco.huejetbrains.components.HuePersistentState
 import com.intellij.execution.testframework.AbstractTestProxy
 import com.intellij.execution.testframework.TestStatusListener
@@ -10,7 +10,10 @@ import inkapplications.shade.constructs.Coordinates
 import inkapplications.shade.constructs.percent
 import inkapplications.shade.lights.LightState
 import inkapplications.shade.lights.LightStateModification
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class TestResultListener : TestStatusListener() {
 
@@ -19,34 +22,41 @@ class TestResultListener : TestStatusListener() {
 
     override fun testSuiteFinished(root: AbstractTestProxy?) {
 
-        val lightId = configState?.hueLightId!!
-        val currentLightState = runBlocking { shade.lights.getLight(lightId) }.state
-        if (root != null) {
-            if (root.isPassed) {
-                CoroutineScope(Dispatchers.Default).launch { testsPassed(lightId, shade, currentLightState) }
-            } else {
-                CoroutineScope(Dispatchers.Default).launch { testsFailed(lightId, shade, currentLightState) }
+        if (configState?.hueEnabled == true) {
+            val lightId = configState?.hueLightId!!
+            if (root != null) {
+                if (root.isPassed) {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        val currentLightState = shade.lights.getLight(lightId).state
+                        testsPassed(lightId, shade, currentLightState)
+                    }
+                } else {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        val currentLightState = shade.lights.getLight(lightId).state
+                        testsFailed(lightId, shade, currentLightState)
+                    }
+                }
             }
         }
     }
 
     private suspend fun testsFailed(lightId: String, shade: Shade, prevLightState: LightState) {
-        pulseLights(shade, lightId, prevLightState, 160)
+        pulseLights(shade, lightId, prevLightState, RED)
     }
 
     private suspend fun testsPassed(lightId: String, shade: Shade, prevLightState: LightState) {
-        pulseLights(shade, lightId, prevLightState, 40)
+        pulseLights(shade, lightId, prevLightState, GREEN)
     }
 
     private suspend fun pulseLights(shade: Shade, lightId: String, prevLightState: LightState, colour: Int) {
-        repeat(8) {
-            shade.lights.setState(lightId, LightStateModification(on = true, brightness = 85.percent,
-                    cieColorCoordinates = Coordinates(Ansi256(colour))))
-            delay(200)
+        repeat(PULSE_REPEATS) {
+            shade.lights.setState(lightId, LightStateModification(on = true, brightness = PULSE_MAX_BRIGHT.percent,
+                cieColorCoordinates = Coordinates(Ansi256(colour))))
+            delay(PULSE_DELAY_IN)
             shade.lights.setState(lightId, LightStateModification(on = false))
-            delay(100)
+            delay(PULSE_DELAY_OUT)
         }
         shade.lights.setState(lightId, LightStateModification(on = prevLightState.on,
-                cieColorCoordinates = prevLightState.cieColorCoordinates, brightness = prevLightState.brightness))
+            cieColorCoordinates = prevLightState.cieColorCoordinates, brightness = prevLightState.brightness))
     }
 }

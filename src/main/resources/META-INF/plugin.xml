@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.asarco.huejetbrains</id>
-    <name>Hueasarco</name>
+    <name>HueJetBrains</name>
     <vendor email="sarcoale@gmail.com">Sarcobjects</vendor>
     <description>bulb by Aiden Icons from the Noun Project</description>
 
@@ -23,10 +23,10 @@
         <listener class="com.github.asarco.huejetbrains.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
-    <actions>
+<!--    <actions>
         <action id="EnableHue" class="com.github.asarco.huejetbrains.actions.EnableHueAction" text="Enable Hue Lights" icon="/noun_bulb_1484510.png">
             <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
         </action>
-    </actions>
+    </actions>-->
 
 </idea-plugin>

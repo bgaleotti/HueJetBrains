@@ -14,11 +14,19 @@
 - [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
-
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
-
-To keep everything working, do not remove `<!-- ... -->` sections. 
+<p>This plugin allows to use a Philips Hue lamp (or compatible) to light in green when tests pass, or red when tests fail. 
+A Hue bridge is required.  
+</p>
+<p>
+After installation, the configuration is in Settings -> Tools -> Hue. In there you can disable or enable the whole plugin.
+</p>
+<p>
+Once enabled, you can enter the IP manually, or press the Discover button to try to find it automatically. 
+If everything is OK, the drop-down will be populated with all the lamps found in the Hue bridge. 
+When selecting every lamp, it will briefly flash to indicate which one is it. 
+From that moment on, the chosen lamp will react to the tests results, and then return to its previous state.
+</p>
+bulb by Aiden Icons from the Noun Project
 <!-- Plugin description end -->
 
 ## Installation

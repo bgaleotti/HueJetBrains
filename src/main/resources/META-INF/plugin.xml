@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.asarco.huejetbrains</id>
-    <name>HueJetBrains</name>
+    <name>HueIntegration</name>
     <vendor email="sarcoale@gmail.com">Sarcobjects</vendor>
     <description>bulb by Aiden Icons from the Noun Project</description>
 

@@ -1,1 +1,1 @@
-rootProject.name = "HueJetBrains"
+rootProject.name = "HueIntegration"
